@@ -1,0 +1,22 @@
+{
+  "author": "stevendejongnl",
+  "description": "A light touch for speech and music on the radio: a small dip from 125 to 315 Hz, a lift of up to +1.5 dB around 2 kHz, and -1 dB at 12.5 kHz.",
+  "equalizer": {
+    "name": "Radio",
+    "gains": [
+      0.0,
+      0.0,
+      -0.5,
+      -1.0,
+      -0.5,
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      1.0,
+      0.5,
+      0.0,
+      -1.0
+    ]
+  }
+}

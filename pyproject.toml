@@ -1,0 +1,15 @@
+[project]
+name = "deq-tune-library"
+version = "0"
+description = "Car profiles and EQs for deq-tune, shared by the people who made them."
+requires-python = ">=3.12"
+dependencies = ["jsonschema>=4.23"]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tools"]

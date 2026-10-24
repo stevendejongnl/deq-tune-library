@@ -1,0 +1,3428 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DEQ Tune",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/profiles": {
+      "get": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "List Profiles",
+        "operationId": "list_profiles_api_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileRead"
+                  },
+                  "type": "array",
+                  "title": "Response List Profiles Api Profiles Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Create Profile",
+        "operationId": "create_profile_api_profiles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profiles/{profile_id}": {
+      "get": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Get Profile",
+        "operationId": "get_profile_api_profiles__profile_id__get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Update Profile",
+        "operationId": "update_profile_api_profiles__profile_id__put",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Delete Profile",
+        "operationId": "delete_profile_api_profiles__profile_id__delete",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profiles/{profile_id}/favorite": {
+      "put": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Set Favorite",
+        "description": "Stars or unstars one profile. A factory preset takes a star too: the\nstar is the person's choice, and it leaves the preset's tuning alone.",
+        "operationId": "set_favorite_api_profiles__profile_id__favorite_put",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteWrite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profiles/{profile_id}/duplicate": {
+      "post": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Duplicate Profile",
+        "operationId": "duplicate_profile_api_profiles__profile_id__duplicate_post",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device": {
+      "get": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Read Device",
+        "description": "Returns what the header shows. This never opens a link itself.",
+        "operationId": "read_device_api_device_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/connect": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Connect Device",
+        "description": "Opens the link and runs the unit's startup sequence.\n\n`LinkKeeper` connects by itself, so the frontend does not call this route.\nThis route reports a failure in the body, and not as an error status. An\nunplugged unit is a normal state, and not a broken request.",
+        "operationId": "connect_device_api_device_connect_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/disconnect": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Disconnect Device",
+        "operationId": "disconnect_device_api_device_disconnect_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/audio": {
+      "get": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Read Audio State",
+        "description": "Reads what the unit is doing with sound, live from the unit.\n\nFour reads in one action, so they share one lock and give one consistent\npicture. Four separate reads could interleave with another caller.\n\nThis route stays out of `GET /api/device` on purpose. The header polls that\nroute, and it never opens a link. These reads cost USB exchanges.",
+        "operationId": "read_audio_state_api_device_audio_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioStateRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/volume": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Set Volume",
+        "description": "Sets the master volume, in dB.\n\nThe unit refuses a volume write with STATUS -6 while it holds THROUGH, and\ntakes one on an OTHER mode. Nobody measured CAR_SOURCE yet. So this route\nwrites first. Only a refusal makes it move the mode, write again, and put\nthe mode back. The refusal must not escape: `DeqDevice.run` drops the link\non any session error, and a refused volume is no broken link.\n`scripts/probe_audio_output.py` does the same dance. A mode change cuts\nthe audio for a moment, so the route avoids one that the unit does not\nneed.",
+        "operationId": "set_volume_api_device_volume_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VolumeWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioStateRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/play-ready": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Send Play Ready",
+        "description": "Tells the unit this device is ready to play audio (0x1a).\n\nThe real app sends it at the end of every cold start, and so does the\nconnect sequence here. Without it the car stayed silent for as long as the\nPi stayed attached. Sent alone in a car on 2026-10-11, it brought the audio\nback at once. This endpoint stays as a lever for a link that is up but\nsilent. It has no body and the reply is a status only.",
+        "operationId": "send_play_ready_api_device_play_ready_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioStateRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/audio-source": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Set Audio Source",
+        "description": "Picks which input the unit plays, and keeps it for the next links.\n\nCAR_SOURCE plays the car's own audio through the DSP. THROUGH most likely\nskips the DSP. The backend sets the stored mode on every new link.",
+        "operationId": "set_audio_source_api_device_audio_source_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioSourceWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioStateRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/mute": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Set Mute",
+        "description": "Mutes or unmutes the unit, and answers with what it now holds.",
+        "operationId": "set_mute_api_device_mute_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MuteWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioStateRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/options": {
+      "get": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Read Device Options",
+        "description": "Returns the value sets the unit accepts, read from the Pioneer app.",
+        "operationId": "read_device_options_api_device_options_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceOptionsRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/tuning/{profile_id}": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Write Tuning",
+        "description": "Sends one stored profile's DSP settings to the unit.",
+        "operationId": "write_tuning_api_device_tuning__profile_id__post",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Profile Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/profile": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Save Unit Profile",
+        "description": "Reads the tune the unit holds now and stores it as a custom profile.\n\nA unit that a Pioneer app tuned keeps that tune in its settings blob. This\nroute turns the blob into a profile, so a person keeps that tune before\na push replaces it.",
+        "operationId": "save_unit_profile_api_device_profile_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnitProfileCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/eq-style": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Select Eq Style",
+        "description": "Picks one of the unit's own EQ styles.",
+        "operationId": "select_eq_style_api_device_eq_style_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EqStyleWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/device/live-simulation": {
+      "post": {
+        "tags": [
+          "device"
+        ],
+        "summary": "Select Live Simulation",
+        "description": "Picks one of the unit's own live-simulation modes.",
+        "operationId": "select_live_simulation_api_device_live_simulation_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiveSimulationWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bridge": {
+      "get": {
+        "tags": [
+          "bridge"
+        ],
+        "summary": "Read Bridge",
+        "description": "Returns the bridge's health, and everything that went wrong with it.\n\nA read raises a notice when the health says so. That lets a power dip\noutlive itself: the live reading recovers, and the notice stays until the\nbridge restarts.",
+        "operationId": "read_bridge_api_bridge_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BridgeRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bridge/system": {
+      "get": {
+        "tags": [
+          "bridge"
+        ],
+        "summary": "Read System",
+        "description": "Returns the bridge's memory, disk, network, load and build.",
+        "operationId": "read_system_api_bridge_system_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BridgeSystemRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bridge/frontend": {
+      "get": {
+        "tags": [
+          "bridge"
+        ],
+        "summary": "Read Frontend",
+        "description": "Describes the web app that the bridge serves, for the car app's copy.\n\nSee `frontend_bundle.py`. A backend with no build answers 404.",
+        "operationId": "read_frontend_api_bridge_frontend_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrontendBundleRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/bridge/frontend/parts/{index}": {
+      "get": {
+        "tags": [
+          "bridge"
+        ],
+        "summary": "Read Frontend Part",
+        "description": "Returns one part of the base64 zip. The reply names its build, so a\ndownload that spans a release starts again.",
+        "operationId": "read_frontend_part_api_bridge_frontend_parts__index__get",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FrontendPartRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/active-profile": {
+      "get": {
+        "tags": [
+          "active-profile"
+        ],
+        "summary": "Read Active Profile",
+        "operationId": "read_active_profile_api_active_profile_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveProfileRead"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "active-profile"
+        ],
+        "summary": "Activate Profile",
+        "description": "Makes one profile the active one, and pushes it when the unit is connected.\n\nA second call with the same profile pushes it again. That is how the app\napplies edits that came after the last push. A failed push answers 200 with\nstatus failed: the choice still holds, and the next link tries again.",
+        "operationId": "activate_profile_api_active_profile_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveProfileWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/active-profile/source": {
+      "put": {
+        "tags": [
+          "active-profile"
+        ],
+        "summary": "Choose Source",
+        "description": "Picks the source mode for now and for every new link.\n\nUnlike `POST /device/audio-source`, it answers 200 while the unit is not\nconnected. The choice then waits for the next link. The car app uses it\nfor that reason.",
+        "operationId": "choose_source_api_active_profile_source_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveSourceWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/active-profile/equalizer": {
+      "put": {
+        "tags": [
+          "active-profile"
+        ],
+        "summary": "Activate Equalizer",
+        "description": "Picks the EQ that plays on top of the car profile, and pushes both.\n\n`null` plays the car profile alone. A second call with the same EQ\npushes again, as with the profile.",
+        "operationId": "activate_equalizer_api_active_profile_equalizer_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActiveEqualizerWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveProfileRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/equalizers": {
+      "get": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "List Equalizers",
+        "operationId": "list_equalizers_api_equalizers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EqualizerRead"
+                  },
+                  "type": "array",
+                  "title": "Response List Equalizers Api Equalizers Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "Create Equalizer",
+        "operationId": "create_equalizer_api_equalizers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EqualizerCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EqualizerRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/equalizers/{equalizer_id}/duplicate": {
+      "post": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "Duplicate Equalizer",
+        "description": "Copies any EQ, a factory one too, as a custom EQ to edit.",
+        "operationId": "duplicate_equalizer_api_equalizers__equalizer_id__duplicate_post",
+        "parameters": [
+          {
+            "name": "equalizer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Equalizer Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EqualizerRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/equalizers/{equalizer_id}": {
+      "put": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "Update Equalizer",
+        "operationId": "update_equalizer_api_equalizers__equalizer_id__put",
+        "parameters": [
+          {
+            "name": "equalizer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Equalizer Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EqualizerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EqualizerRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "Delete Equalizer",
+        "operationId": "delete_equalizer_api_equalizers__equalizer_id__delete",
+        "parameters": [
+          {
+            "name": "equalizer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Equalizer Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/equalizers/{equalizer_id}/favorite": {
+      "put": {
+        "tags": [
+          "equalizers"
+        ],
+        "summary": "Set Favorite",
+        "description": "Stars or unstars one EQ. A factory EQ takes a star too: the star is\nthe person's choice, and it leaves the curve alone.",
+        "operationId": "set_favorite_api_equalizers__equalizer_id__favorite_put",
+        "parameters": [
+          {
+            "name": "equalizer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Equalizer Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteWrite"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EqualizerRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi": {
+      "get": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Read Wifi",
+        "operationId": "read_wifi_api_wifi_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WifiRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi/networks": {
+      "post": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Save Network",
+        "operationId": "save_network_api_wifi_networks_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WifiNetworkWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WifiRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi/forget": {
+      "post": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Forget Network",
+        "operationId": "forget_network_api_wifi_forget_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WifiForgetWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WifiRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi/join": {
+      "post": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Join Network",
+        "operationId": "join_network_api_wifi_join_post",
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi/access-point": {
+      "get": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Read Access Point",
+        "operationId": "read_access_point_api_wifi_access_point_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessPointRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wifi/access-point/key": {
+      "put": {
+        "tags": [
+          "wifi"
+        ],
+        "summary": "Set Access Point Key",
+        "operationId": "set_access_point_key_api_wifi_access_point_key_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessPointKeyWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessPointRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/updates": {
+      "get": {
+        "tags": [
+          "updates"
+        ],
+        "summary": "Read Updates",
+        "operationId": "read_updates_api_updates_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatesRead"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/updates/settings": {
+      "put": {
+        "tags": [
+          "updates"
+        ],
+        "summary": "Write Settings",
+        "operationId": "write_settings_api_updates_settings_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSettingsWrite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatesRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/updates/request": {
+      "post": {
+        "tags": [
+          "updates"
+        ],
+        "summary": "Request Update",
+        "operationId": "request_update_api_updates_request_post",
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/library/export": {
+      "get": {
+        "tags": [
+          "library"
+        ],
+        "summary": "Read Library Export",
+        "operationId": "read_library_export_api_library_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryExport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/library/import": {
+      "post": {
+        "tags": [
+          "library"
+        ],
+        "summary": "Import Library File",
+        "operationId": "import_library_file_api_library_import_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LibraryExport"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryImportRead"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccessPointKeyWrite": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key"
+        ],
+        "title": "AccessPointKeyWrite",
+        "description": "A new key for the access point. It applies at the access point's\nnext start, which is the Pi's next boot."
+      },
+      "AccessPointRead": {
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "title": "Ssid"
+          },
+          "uses_default_key": {
+            "type": "boolean",
+            "title": "Uses Default Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ssid",
+          "uses_default_key"
+        ],
+        "title": "AccessPointRead",
+        "description": "The Pi's own access point. It never carries the key: anyone in\nBluetooth range can read this."
+      },
+      "ActiveEqualizerWrite": {
+        "properties": {
+          "equalizer_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Equalizer Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "equalizer_id"
+        ],
+        "title": "ActiveEqualizerWrite",
+        "description": "`None` plays the car profile with no EQ on top."
+      },
+      "ActiveProfileRead": {
+        "properties": {
+          "profile_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          },
+          "equalizer_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Equalizer Id"
+          },
+          "source_mode": {
+            "type": "string",
+            "title": "Source Mode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_id",
+          "status",
+          "source_mode"
+        ],
+        "title": "ActiveProfileRead",
+        "description": "What the unit should play, and whether it plays it now.\n\n`profile_id` is the car profile and `equalizer_id` the EQ on top of it.\n`status` is one of none, waiting, applied, outdated and failed, for the\ntwo together. `problem` says why the last push failed. `source_mode` is\nthe mode that each new link gets."
+      },
+      "ActiveProfileWrite": {
+        "properties": {
+          "profile_id": {
+            "type": "integer",
+            "title": "Profile Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_id"
+        ],
+        "title": "ActiveProfileWrite"
+      },
+      "ActiveSourceWrite": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "ActiveSourceWrite",
+        "description": "A name from the AUDIO_SOURCE enum."
+      },
+      "AudioSourceWrite": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "AudioSourceWrite"
+      },
+      "AudioStateRead": {
+        "properties": {
+          "source_mode": {
+            "type": "string",
+            "title": "Source Mode"
+          },
+          "source_mode_wire": {
+            "type": "integer",
+            "title": "Source Mode Wire"
+          },
+          "volume_db": {
+            "type": "integer",
+            "title": "Volume Db"
+          },
+          "muted": {
+            "type": "boolean",
+            "title": "Muted"
+          },
+          "mute_state_wire": {
+            "type": "integer",
+            "title": "Mute State Wire"
+          },
+          "driving": {
+            "type": "boolean",
+            "title": "Driving"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_mode",
+          "source_mode_wire",
+          "volume_db",
+          "muted",
+          "mute_state_wire",
+          "driving"
+        ],
+        "title": "AudioStateRead",
+        "description": "What the unit does with sound, read live from it.\n\nA separate model from `DeviceRead`, on purpose. The header polls that one,\nand it never opens a link. Every field here costs a request and a reply\nover USB. So the caller chooses when to ask for them.\n\nThis model exists because a tuning can apply without error and still give\nsilence, and nothing said so before. On 2026-10-09 a person applied\nprofiles and EQ styles in a car with no sound at all. The app could not\nshow whether the unit was on mute, near the bottom of its volume range, or\non a source that plays nothing."
+      },
+      "BridgeNoticeRead": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "severity": {
+            "type": "string",
+            "title": "Severity"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "first_seen_seconds": {
+            "type": "number",
+            "title": "First Seen Seconds"
+          },
+          "last_seen_seconds": {
+            "type": "number",
+            "title": "Last Seen Seconds"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "severity",
+          "message",
+          "first_seen_seconds",
+          "last_seen_seconds",
+          "count"
+        ],
+        "title": "BridgeNoticeRead",
+        "description": "One fault that the bridge saw since it started."
+      },
+      "BridgeRead": {
+        "properties": {
+          "undervoltage_now": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Undervoltage Now"
+          },
+          "undervoltage_since_boot": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Undervoltage Since Boot"
+          },
+          "uptime_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uptime Seconds"
+          },
+          "notices": {
+            "items": {
+              "$ref": "#/components/schemas/BridgeNoticeRead"
+            },
+            "type": "array",
+            "title": "Notices",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "BridgeRead",
+        "description": "What the app shows about the machine that holds the link.\n\nThis model describes the bridge, and not the DEQ. The two fail for\ndifferent reasons and ask different things of a person. A DEQ that is off\nis normal. A bridge that browns out has a fault in the wiring.\n\nThe undervoltage fields are `None` where the machine cannot tell. A laptop\nhas no `vcgencmd`, and `False` would be a claim it cannot make."
+      },
+      "BridgeSystemRead": {
+        "properties": {
+          "hostname": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hostname"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "operating_system": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operating System"
+          },
+          "kernel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kernel"
+          },
+          "architecture": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Architecture"
+          },
+          "python_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Python Version"
+          },
+          "uptime_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Uptime Seconds"
+          },
+          "load_average": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Load Average"
+          },
+          "cpu_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cpu Count"
+          },
+          "cpu_temperature_celsius": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cpu Temperature Celsius"
+          },
+          "cpu_frequency_mhz": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cpu Frequency Mhz"
+          },
+          "throttled_flags": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Throttled Flags"
+          },
+          "memory_total_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Memory Total Bytes"
+          },
+          "memory_available_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Memory Available Bytes"
+          },
+          "swap_total_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Swap Total Bytes"
+          },
+          "swap_free_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Swap Free Bytes"
+          },
+          "backend_memory_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Backend Memory Bytes"
+          },
+          "disk_total_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disk Total Bytes"
+          },
+          "disk_free_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disk Free Bytes"
+          },
+          "frontend_build": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Frontend Build"
+          },
+          "interfaces": {
+            "items": {
+              "$ref": "#/components/schemas/NetworkInterfaceRead"
+            },
+            "type": "array",
+            "title": "Interfaces",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "BridgeSystemRead",
+        "description": "The bridge's machine statistics, for the app's system dialog.\n\nEach field is `None` where the machine cannot tell. A laptop has no Pi\nmodel and no `vcgencmd`. `frontend_build` is the build id of the frontend\nthat the bridge serves now. The app compares it with its own build id, and\nso tells a cached page from the current one."
+      },
+      "CancellingEq": {
+        "properties": {
+          "L": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "L"
+          },
+          "R": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "R"
+          }
+        },
+        "type": "object",
+        "required": [
+          "L",
+          "R"
+        ],
+        "title": "CancellingEq"
+      },
+      "CancellingTA": {
+        "properties": {
+          "L": {
+            "type": "number",
+            "title": "L"
+          },
+          "R": {
+            "type": "number",
+            "title": "R"
+          }
+        },
+        "type": "object",
+        "required": [
+          "L",
+          "R"
+        ],
+        "title": "CancellingTA"
+      },
+      "ChannelBank": {
+        "properties": {
+          "isLocked": {
+            "type": "boolean",
+            "title": "Islocked"
+          },
+          "numOfBand": {
+            "type": "integer",
+            "title": "Numofband"
+          },
+          "selectedBank": {
+            "type": "integer",
+            "title": "Selectedbank"
+          },
+          "banks": {
+            "$ref": "#/components/schemas/ChannelBankData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "isLocked",
+          "numOfBand",
+          "selectedBank",
+          "banks"
+        ],
+        "title": "ChannelBank"
+      },
+      "ChannelBankData": {
+        "properties": {
+          "q": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Q"
+          },
+          "f0": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "F0"
+          },
+          "gain": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Gain"
+          }
+        },
+        "type": "object",
+        "required": [
+          "q",
+          "f0",
+          "gain"
+        ],
+        "title": "ChannelBankData"
+      },
+      "DeqEnumValueRead": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "wire_value": {
+            "type": "integer",
+            "title": "Wire Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "wire_value"
+        ],
+        "title": "DeqEnumValueRead",
+        "description": "One value the unit accepts, as the Pioneer app declares it."
+      },
+      "DeviceOptionsRead": {
+        "properties": {
+          "eq_styles": {
+            "items": {
+              "$ref": "#/components/schemas/DeqEnumValueRead"
+            },
+            "type": "array",
+            "title": "Eq Styles"
+          },
+          "live_simulations": {
+            "items": {
+              "$ref": "#/components/schemas/DeqEnumValueRead"
+            },
+            "type": "array",
+            "title": "Live Simulations"
+          },
+          "audio_sources": {
+            "items": {
+              "$ref": "#/components/schemas/DeqEnumValueRead"
+            },
+            "type": "array",
+            "title": "Audio Sources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "eq_styles",
+          "live_simulations",
+          "audio_sources"
+        ],
+        "title": "DeviceOptionsRead",
+        "description": "Every value set the unit's own DSP offers.\n\nThese come from the app, through `deq_enums.json`, so the frontend\nnever has to keep a list of its own."
+      },
+      "DeviceRead": {
+        "properties": {
+          "connected": {
+            "type": "boolean",
+            "title": "Connected"
+          },
+          "firmware_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firmware Version"
+          },
+          "serial": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serial"
+          },
+          "problem": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Problem"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connected"
+        ],
+        "title": "DeviceRead",
+        "description": "What the header shows about the unit."
+      },
+      "EqStyleWrite": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "EqStyleWrite",
+        "description": "Which built-in EQ style to select on the unit."
+      },
+      "EqualizerCreate": {
+        "properties": {
+          "gains": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "maxItems": 13,
+            "minItems": 13,
+            "title": "Gains"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "gains",
+          "name"
+        ],
+        "title": "EqualizerCreate"
+      },
+      "EqualizerRead": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "favorite": {
+            "type": "boolean",
+            "title": "Favorite"
+          },
+          "gains": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Gains"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "source",
+          "favorite",
+          "gains"
+        ],
+        "title": "EqualizerRead"
+      },
+      "EqualizerUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "gains": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array",
+                "maxItems": 13,
+                "minItems": 13
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gains"
+          }
+        },
+        "type": "object",
+        "title": "EqualizerUpdate"
+      },
+      "FactoryCancel": {
+        "properties": {
+          "available": {
+            "type": "boolean",
+            "title": "Available"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "data": {
+            "$ref": "#/components/schemas/FactoryCancelData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "available",
+          "enabled",
+          "data"
+        ],
+        "title": "FactoryCancel"
+      },
+      "FactoryCancelData": {
+        "properties": {
+          "cancellingEQ": {
+            "$ref": "#/components/schemas/CancellingEq"
+          },
+          "cancellingTACm": {
+            "$ref": "#/components/schemas/CancellingTA"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cancellingEQ",
+          "cancellingTACm"
+        ],
+        "title": "FactoryCancelData"
+      },
+      "FaderBalance": {
+        "properties": {
+          "fader": {
+            "type": "number",
+            "title": "Fader"
+          },
+          "balance": {
+            "type": "number",
+            "title": "Balance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fader",
+          "balance"
+        ],
+        "title": "FaderBalance"
+      },
+      "FavoriteWrite": {
+        "properties": {
+          "favorite": {
+            "type": "boolean",
+            "title": "Favorite"
+          }
+        },
+        "type": "object",
+        "required": [
+          "favorite"
+        ],
+        "title": "FavoriteWrite"
+      },
+      "Filter": {
+        "properties": {
+          "front": {
+            "$ref": "#/components/schemas/FilterBand"
+          },
+          "rear": {
+            "$ref": "#/components/schemas/FilterBand"
+          }
+        },
+        "type": "object",
+        "required": [
+          "front",
+          "rear"
+        ],
+        "title": "Filter"
+      },
+      "FilterBand": {
+        "properties": {
+          "cutoff_hpf": {
+            "type": "number",
+            "title": "Cutoff Hpf"
+          },
+          "slope_hpf": {
+            "type": "number",
+            "title": "Slope Hpf"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cutoff_hpf",
+          "slope_hpf"
+        ],
+        "title": "FilterBand"
+      },
+      "FoundationEq": {
+        "properties": {
+          "isLRMode": {
+            "type": "boolean",
+            "title": "Islrmode"
+          },
+          "eqs": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/LRBank"
+            },
+            "type": "object",
+            "title": "Eqs"
+          },
+          "expandEq": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ChannelBank"
+            },
+            "type": "object",
+            "title": "Expandeq"
+          }
+        },
+        "type": "object",
+        "required": [
+          "isLRMode",
+          "eqs",
+          "expandEq"
+        ],
+        "title": "FoundationEq"
+      },
+      "FrontendBundleRead": {
+        "properties": {
+          "build": {
+            "type": "string",
+            "title": "Build"
+          },
+          "sha256": {
+            "type": "string",
+            "title": "Sha256"
+          },
+          "file_count": {
+            "type": "integer",
+            "title": "File Count"
+          },
+          "part_count": {
+            "type": "integer",
+            "title": "Part Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "build",
+          "sha256",
+          "file_count",
+          "part_count"
+        ],
+        "title": "FrontendBundleRead",
+        "description": "The web app that the bridge serves, as a base64 zip in parts.\n\n`sha256` is the hash of the whole zip, after the parts are joined and\ndecoded."
+      },
+      "FrontendPartRead": {
+        "properties": {
+          "build": {
+            "type": "string",
+            "title": "Build"
+          },
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
+          "data": {
+            "type": "string",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "build",
+          "index",
+          "data"
+        ],
+        "title": "FrontendPartRead"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LRBank": {
+        "properties": {
+          "isLocked": {
+            "type": "boolean",
+            "title": "Islocked"
+          },
+          "numOfBand": {
+            "type": "integer",
+            "title": "Numofband"
+          },
+          "selectedBank": {
+            "type": "integer",
+            "title": "Selectedbank"
+          },
+          "banks": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Banks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "isLocked",
+          "numOfBand",
+          "selectedBank",
+          "banks"
+        ],
+        "title": "LRBank",
+        "description": "A combined L+R graphic-EQ slot. `banks` holds one 13-value gain array\nper storable bank (the device has multiple slots). `selectedBank` picks\nwhich one is active. Frequencies follow the fixed 13-band table that\n`expandEq` also gives explicitly per channel (50Hz-12.5kHz, doubling)."
+      },
+      "LibraryEqualizer": {
+        "properties": {
+          "gains": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "maxItems": 13,
+            "minItems": 13,
+            "title": "Gains"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "favorite": {
+            "type": "boolean",
+            "title": "Favorite",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "gains",
+          "name"
+        ],
+        "title": "LibraryEqualizer"
+      },
+      "LibraryExport": {
+        "properties": {
+          "format": {
+            "type": "string",
+            "title": "Format",
+            "default": "deq-tune-library"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version",
+            "default": 1
+          },
+          "profiles": {
+            "items": {
+              "$ref": "#/components/schemas/LibraryProfile"
+            },
+            "type": "array",
+            "title": "Profiles",
+            "default": []
+          },
+          "equalizers": {
+            "items": {
+              "$ref": "#/components/schemas/LibraryEqualizer"
+            },
+            "type": "array",
+            "title": "Equalizers",
+            "default": []
+          },
+          "starred_factory_profiles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Starred Factory Profiles",
+            "default": []
+          },
+          "starred_factory_equalizers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Starred Factory Equalizers",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "LibraryExport",
+        "description": "A person's own library, as one file: the custom profiles, the custom\nEQs, and the stars on factory presets. The factory presets themselves\ncome with every install, so the file names them only by their name."
+      },
+      "LibraryImportRead": {
+        "properties": {
+          "profiles_added": {
+            "type": "integer",
+            "title": "Profiles Added"
+          },
+          "equalizers_added": {
+            "type": "integer",
+            "title": "Equalizers Added"
+          },
+          "skipped": {
+            "type": "integer",
+            "title": "Skipped"
+          },
+          "stars_added": {
+            "type": "integer",
+            "title": "Stars Added"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profiles_added",
+          "equalizers_added",
+          "skipped",
+          "stars_added"
+        ],
+        "title": "LibraryImportRead",
+        "description": "What an import added. An item that the library holds already, with\nthe same name and the same content, counts as skipped."
+      },
+      "LibraryProfile": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "brand_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Name"
+          },
+          "car_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Model"
+          },
+          "speaker_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speaker Type"
+          },
+          "supported_processors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Processors",
+            "default": []
+          },
+          "favorite": {
+            "type": "boolean",
+            "title": "Favorite",
+            "default": false
+          },
+          "data": {
+            "$ref": "#/components/schemas/TuningData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "data"
+        ],
+        "title": "LibraryProfile",
+        "description": "A custom profile in an export. It has no id: the importing database\ngives it a new one."
+      },
+      "LiveSimulationWrite": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "LiveSimulationWrite",
+        "description": "Which built-in live-simulation mode to select on the unit."
+      },
+      "MuteWrite": {
+        "properties": {
+          "muted": {
+            "type": "boolean",
+            "title": "Muted"
+          }
+        },
+        "type": "object",
+        "required": [
+          "muted"
+        ],
+        "title": "MuteWrite"
+      },
+      "NetworkInterfaceRead": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "state": {
+            "type": "string",
+            "title": "State"
+          },
+          "mac_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mac Address"
+          },
+          "addresses": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Addresses",
+            "default": []
+          },
+          "received_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Received Bytes"
+          },
+          "sent_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sent Bytes"
+          },
+          "signal_dbm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Signal Dbm"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "state"
+        ],
+        "title": "NetworkInterfaceRead",
+        "description": "One network interface of the bridge, without loopback."
+      },
+      "ProfileCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TuningData"
+          },
+          "brand_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Name"
+          },
+          "car_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Model"
+          },
+          "speaker_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speaker Type"
+          },
+          "supported_processors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Processors",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "data"
+        ],
+        "title": "ProfileCreate"
+      },
+      "ProfileRead": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "brand_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Name"
+          },
+          "car_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Model"
+          },
+          "speaker_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speaker Type"
+          },
+          "supported_processors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Processors"
+          },
+          "favorite": {
+            "type": "boolean",
+            "title": "Favorite"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TuningData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "source",
+          "brand_name",
+          "car_model",
+          "speaker_type",
+          "supported_processors",
+          "favorite",
+          "data"
+        ],
+        "title": "ProfileRead"
+      },
+      "ProfileUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TuningData"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "ProfileUpdate"
+      },
+      "SavedWifiNetworkRead": {
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "title": "Ssid"
+          },
+          "connected": {
+            "type": "boolean",
+            "title": "Connected"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ssid",
+          "connected"
+        ],
+        "title": "SavedWifiNetworkRead"
+      },
+      "Speaker": {
+        "properties": {
+          "isPositivePhase": {
+            "type": "boolean",
+            "title": "Ispositivephase"
+          },
+          "levelDB": {
+            "type": "number",
+            "title": "Leveldb"
+          },
+          "timeAlignmentCm": {
+            "type": "number",
+            "title": "Timealignmentcm"
+          },
+          "levelDBExtended": {
+            "type": "number",
+            "title": "Leveldbextended"
+          }
+        },
+        "type": "object",
+        "required": [
+          "isPositivePhase",
+          "levelDB",
+          "timeAlignmentCm",
+          "levelDBExtended"
+        ],
+        "title": "Speaker"
+      },
+      "TimeAlignment": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "easySoundFitModeEnabled": {
+            "type": "boolean",
+            "title": "Easysoundfitmodeenabled"
+          },
+          "easySoundFitMode": {
+            "type": "integer",
+            "title": "Easysoundfitmode"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled",
+          "easySoundFitModeEnabled",
+          "easySoundFitMode"
+        ],
+        "title": "TimeAlignment"
+      },
+      "TuningData": {
+        "properties": {
+          "foundationEq": {
+            "$ref": "#/components/schemas/FoundationEq"
+          },
+          "speakers": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Speaker"
+            },
+            "type": "object",
+            "title": "Speakers"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/Filter"
+          },
+          "factoryCancel": {
+            "$ref": "#/components/schemas/FactoryCancel"
+          },
+          "faderBalance": {
+            "$ref": "#/components/schemas/FaderBalance"
+          },
+          "timeAlignment": {
+            "$ref": "#/components/schemas/TimeAlignment"
+          }
+        },
+        "type": "object",
+        "required": [
+          "foundationEq",
+          "speakers",
+          "filter",
+          "factoryCancel",
+          "faderBalance",
+          "timeAlignment"
+        ],
+        "title": "TuningData",
+        "description": "Everything except `header`: the part that the EQ UI edits, and that the\nbackend writes to the device."
+      },
+      "UnitProfileCreate": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "UnitProfileCreate",
+        "description": "The name for a profile read from the unit."
+      },
+      "UpdateHistoryRead": {
+        "properties": {
+          "from_version": {
+            "type": "string",
+            "title": "From Version"
+          },
+          "to_version": {
+            "type": "string",
+            "title": "To Version"
+          },
+          "at": {
+            "type": "string",
+            "title": "At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "from_version",
+          "to_version",
+          "at"
+        ],
+        "title": "UpdateHistoryRead"
+      },
+      "UpdateSettingsWrite": {
+        "properties": {
+          "automatic": {
+            "type": "boolean",
+            "title": "Automatic"
+          }
+        },
+        "type": "object",
+        "required": [
+          "automatic"
+        ],
+        "title": "UpdateSettingsWrite"
+      },
+      "UpdatesRead": {
+        "properties": {
+          "supported": {
+            "type": "boolean",
+            "title": "Supported"
+          },
+          "installed": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installed"
+          },
+          "latest": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest"
+          },
+          "automatic": {
+            "type": "boolean",
+            "title": "Automatic",
+            "default": true
+          },
+          "update_available": {
+            "type": "boolean",
+            "title": "Update Available",
+            "default": false
+          },
+          "gadget_pending": {
+            "type": "boolean",
+            "title": "Gadget Pending",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          },
+          "release_url": {
+            "type": "string",
+            "title": "Release Url",
+            "default": ""
+          },
+          "checked_at": {
+            "type": "string",
+            "title": "Checked At",
+            "default": ""
+          },
+          "last_result": {
+            "type": "string",
+            "title": "Last Result",
+            "default": ""
+          },
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/UpdateHistoryRead"
+            },
+            "type": "array",
+            "title": "History",
+            "default": []
+          },
+          "frontend_build": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Frontend Build"
+          }
+        },
+        "type": "object",
+        "required": [
+          "supported"
+        ],
+        "title": "UpdatesRead",
+        "description": "What the Pi's release updater last found.\n\n`supported` is false on a machine with no updater, such as a laptop.\nThen every other field keeps its default."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VisibleWifiNetworkRead": {
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "title": "Ssid"
+          },
+          "signal": {
+            "type": "integer",
+            "title": "Signal"
+          },
+          "secured": {
+            "type": "boolean",
+            "title": "Secured"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ssid",
+          "signal",
+          "secured"
+        ],
+        "title": "VisibleWifiNetworkRead"
+      },
+      "VolumeWrite": {
+        "properties": {
+          "volume_db": {
+            "type": "integer",
+            "title": "Volume Db"
+          }
+        },
+        "type": "object",
+        "required": [
+          "volume_db"
+        ],
+        "title": "VolumeWrite"
+      },
+      "WifiForgetWrite": {
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "title": "Ssid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ssid"
+        ],
+        "title": "WifiForgetWrite"
+      },
+      "WifiNetworkWrite": {
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "title": "Ssid"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "ssid"
+        ],
+        "title": "WifiNetworkWrite",
+        "description": "A network to save. An empty password saves an open network.\n\nThe helper on the bridge checks the same rules again. This check gives\nthe app a 422 before anything runs as root."
+      },
+      "WifiRead": {
+        "properties": {
+          "saved": {
+            "items": {
+              "$ref": "#/components/schemas/SavedWifiNetworkRead"
+            },
+            "type": "array",
+            "title": "Saved"
+          },
+          "visible": {
+            "items": {
+              "$ref": "#/components/schemas/VisibleWifiNetworkRead"
+            },
+            "type": "array",
+            "title": "Visible"
+          }
+        },
+        "type": "object",
+        "required": [
+          "saved",
+          "visible"
+        ],
+        "title": "WifiRead",
+        "description": "The networks that the bridge joins, and the networks in range.\n\n`visible` comes from the bridge's last scan. Nothing scans for this\nrequest, because a scan touches the radio."
+      }
+    }
+  }
+}
