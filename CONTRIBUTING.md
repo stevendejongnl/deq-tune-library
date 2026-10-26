@@ -1,5 +1,11 @@
 # Add an entry
 
+The easiest way is in the deq-tune app: **Settings → Community → Share your
+own profile or EQ**. It builds the entry file and opens GitHub's new-file
+page with it filled in. You need only a GitHub account.
+
+## By hand
+
 You need a GitHub account, `git`, and [uv](https://docs.astral.sh/uv/).
 
 1. In the deq-tune app, open **Settings → Backup** and tap **Save to a file**.
